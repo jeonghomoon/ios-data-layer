@@ -15,6 +15,10 @@ protocol Routable: URLRequestConvertible {
     var path: String { get }
 
     var parameters: Parameters { get }
+
+    var encoding: ParameterEncoding? { get }
+
+    var multipartFormData: MultipartFormData? { get }
 }
 
 extension Routable {
@@ -26,34 +30,47 @@ extension Routable {
         Parameters()
     }
 
+    var encoding: ParameterEncoding? {
+        nil
+    }
+
+    var multipartFormData: MultipartFormData? {
+        nil
+    }
+
     func asURLRequest() throws -> URLRequest {
         let url = baseURL.appendingPathComponent(path)
         var request = URLRequest(url: url)
         request.method = method
 
-        let encoding: ParameterEncoding
+        if let encoding = encoding {
+            request = try encoding.encode(request, with: parameters)
+        } else {
+            let encoding: ParameterEncoding
 
-        switch method {
-        case .post, .put:
-            encoding = JSONEncoding.default
-        case .get, .delete:
-            encoding = URLEncoding.default
-        default:
-            debugPrint(
-                """
-                    Failed to endcode parameters, Check if API is RESTful,
-                    Parameters is encodable, or Method is valid.
-                """
-            )
+            switch method {
+            case .post, .put:
+                encoding = JSONEncoding.default
+            case .get, .delete:
+                encoding = URLEncoding.default
+            default:
+                debugPrint(
+                    """
+                        Failed to endcode parameters, Check if API is RESTful,
+                        Parameters is encodable, or Method is valid.
+                    """
+                )
 
-            throw NetworkServiceError.parametersEncodingFailed
+                throw NetworkServiceError.parametersEncodingFailed
+            }
+
+            request = try encoding.encode(request, with: parameters)
         }
-
-        request = try encoding.encode(request, with: parameters)
 
         return request
     }
 }
+
 
 enum NetworkServiceError: Error, Equatable {
     case parametersEncodingFailed
