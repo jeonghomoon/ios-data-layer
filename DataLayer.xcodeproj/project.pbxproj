@@ -14,6 +14,7 @@
 		41BDFE0728CA164C00017768 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41BDFE0628CA164C00017768 /* Assets.xcassets */; };
 		41BDFE0A28CA164C00017768 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41BDFE0828CA164C00017768 /* LaunchScreen.storyboard */; };
 		41BDFE1528CA164C00017768 /* DataLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BDFE1428CA164C00017768 /* DataLayerTests.swift */; };
+		41BDFE6B28CBF12400017768 /* Routable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BDFE6A28CBF12400017768 /* Routable.swift */; };
 		43191D82CA1EF59A6928AE46 /* Pods_DataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAFC0BFF785D8CB01827DF2D /* Pods_DataLayer.framework */; };
 		87D9684BF2F6FAA3DCB0E25D /* Pods_DataLayerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFB777B2EB545EBF1F9C23FF /* Pods_DataLayerTests.framework */; };
 /* End PBXBuildFile section */
@@ -40,6 +41,7 @@
 		41BDFE0B28CA164C00017768 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41BDFE1028CA164C00017768 /* DataLayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataLayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		41BDFE1428CA164C00017768 /* DataLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLayerTests.swift; sourceTree = "<group>"; };
+		41BDFE6A28CBF12400017768 /* Routable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routable.swift; sourceTree = "<group>"; };
 		DAFC0BFF785D8CB01827DF2D /* Pods_DataLayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DataLayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC0146D3161118FC38243A4C /* Pods-DataLayerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataLayerTests.release.xcconfig"; path = "Target Support Files/Pods-DataLayerTests/Pods-DataLayerTests.release.xcconfig"; sourceTree = "<group>"; };
 		E6AC935ED0A6074A91D38FA6 /* Pods-DataLayerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataLayerTests.debug.xcconfig"; path = "Target Support Files/Pods-DataLayerTests/Pods-DataLayerTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 		41BDFDFC28CA164B00017768 /* DataLayer */ = {
 			isa = PBXGroup;
 			children = (
+				41BDFE6928CBF11900017768 /* Alamofire */,
 				41BDFDFD28CA164B00017768 /* AppDelegate.swift */,
 				41BDFDFF28CA164B00017768 /* SceneDelegate.swift */,
 				41BDFE0128CA164B00017768 /* ViewController.swift */,
@@ -109,6 +112,14 @@
 			path = DataLayerTests;
 			sourceTree = "<group>";
 		};
+		41BDFE6928CBF11900017768 /* Alamofire */ = {
+			isa = PBXGroup;
+			children = (
+				41BDFE6A28CBF12400017768 /* Routable.swift */,
+			);
+			path = Alamofire;
+			sourceTree = "<group>";
+		};
 		C4984F65CCE3AD7EAADE4BDD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,7 +137,6 @@
 				E6AC935ED0A6074A91D38FA6 /* Pods-DataLayerTests.debug.xcconfig */,
 				DC0146D3161118FC38243A4C /* Pods-DataLayerTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -301,6 +311,7 @@
 				41BDFE0228CA164B00017768 /* ViewController.swift in Sources */,
 				41BDFDFE28CA164B00017768 /* AppDelegate.swift in Sources */,
 				41BDFE0028CA164B00017768 /* SceneDelegate.swift in Sources */,
+				41BDFE6B28CBF12400017768 /* Routable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
