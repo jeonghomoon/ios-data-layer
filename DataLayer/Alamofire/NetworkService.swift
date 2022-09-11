@@ -14,10 +14,17 @@ protocol NetworkServiceable {
         router: Routable,
         completion: @escaping (RequestResult<Success, Failure>) -> Void
     )
+
+    func upload<Success: Codable, Failure: Codable>(
+        router: Routable,
+        completion: @escaping (RequestResult<Success, Failure>) -> Void
+    )
 }
 
 final class NetworkService: NetworkServiceable {
     enum Error: Swift.Error, Equatable {
+        case multipartRequestFailed
+
         case parametersEncodingFailed
     }
 
@@ -31,7 +38,29 @@ final class NetworkService: NetworkServiceable {
         router: Routable,
         completion: @escaping (RequestResult<Success, Failure>) -> Void
     ) {
-        session.request(router).responseDecodable(
+        let request = session.request(router)
+
+        performRequest(request, completion: completion)
+    }
+
+    func upload<Success: Codable, Failure: Codable>(
+        router: Routable,
+        completion: @escaping (RequestResult<Success, Failure>) -> Void
+    ) {
+        guard let data = router.multipartFormData else {
+            return completion(.failure(Error.multipartRequestFailed))
+        }
+
+        let request = session.upload(multipartFormData: data, with: router)
+
+        performRequest(request, completion: completion)
+    }
+
+    private func performRequest<Success: Codable, Failure: Codable>(
+        _ request: DataRequest,
+        completion: @escaping (RequestResult<Success, Failure>) -> Void
+    ) {
+        request.responseDecodable(
             of: Response<Success, Failure>.self
         ) { response in let result = response.result
             switch result {
@@ -43,4 +72,3 @@ final class NetworkService: NetworkServiceable {
         }
     }
 }
-
