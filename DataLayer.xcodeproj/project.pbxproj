@@ -13,10 +13,13 @@
 		41BDFE0528CA164B00017768 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41BDFE0328CA164B00017768 /* Main.storyboard */; };
 		41BDFE0728CA164C00017768 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41BDFE0628CA164C00017768 /* Assets.xcassets */; };
 		41BDFE0A28CA164C00017768 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41BDFE0828CA164C00017768 /* LaunchScreen.storyboard */; };
-		41BDFE1528CA164C00017768 /* DataLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BDFE1428CA164C00017768 /* DataLayerTests.swift */; };
 		41BDFE6B28CBF12400017768 /* Routable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BDFE6A28CBF12400017768 /* Routable.swift */; };
 		41BDFE6F28CCC75E00017768 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BDFE6E28CCC75E00017768 /* Response.swift */; };
 		41BDFE7128CDBAD300017768 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BDFE7028CDBAD300017768 /* NetworkService.swift */; };
+		41BDFE7428CDCCD500017768 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BDFE7328CDCCD500017768 /* MockURLProtocol.swift */; };
+		41BDFE7628CDCD3F00017768 /* NetworkService+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BDFE7528CDCD3F00017768 /* NetworkService+.swift */; };
+		41BDFE7828CDFC8500017768 /* TestRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BDFE7728CDFC8500017768 /* TestRouter.swift */; };
+		41BDFE7A28CDFC9C00017768 /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BDFE7928CDFC9C00017768 /* NetworkServiceTests.swift */; };
 		43191D82CA1EF59A6928AE46 /* Pods_DataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAFC0BFF785D8CB01827DF2D /* Pods_DataLayer.framework */; };
 		87D9684BF2F6FAA3DCB0E25D /* Pods_DataLayerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFB777B2EB545EBF1F9C23FF /* Pods_DataLayerTests.framework */; };
 /* End PBXBuildFile section */
@@ -42,10 +45,13 @@
 		41BDFE0928CA164C00017768 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		41BDFE0B28CA164C00017768 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41BDFE1028CA164C00017768 /* DataLayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataLayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		41BDFE1428CA164C00017768 /* DataLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLayerTests.swift; sourceTree = "<group>"; };
 		41BDFE6A28CBF12400017768 /* Routable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routable.swift; sourceTree = "<group>"; };
 		41BDFE6E28CCC75E00017768 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		41BDFE7028CDBAD300017768 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		41BDFE7328CDCCD500017768 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
+		41BDFE7528CDCD3F00017768 /* NetworkService+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkService+.swift"; sourceTree = "<group>"; };
+		41BDFE7728CDFC8500017768 /* TestRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRouter.swift; sourceTree = "<group>"; };
+		41BDFE7928CDFC9C00017768 /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
 		DAFC0BFF785D8CB01827DF2D /* Pods_DataLayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DataLayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC0146D3161118FC38243A4C /* Pods-DataLayerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataLayerTests.release.xcconfig"; path = "Target Support Files/Pods-DataLayerTests/Pods-DataLayerTests.release.xcconfig"; sourceTree = "<group>"; };
 		E6AC935ED0A6074A91D38FA6 /* Pods-DataLayerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataLayerTests.debug.xcconfig"; path = "Target Support Files/Pods-DataLayerTests/Pods-DataLayerTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -111,7 +117,7 @@
 		41BDFE1328CA164C00017768 /* DataLayerTests */ = {
 			isa = PBXGroup;
 			children = (
-				41BDFE1428CA164C00017768 /* DataLayerTests.swift */,
+				41BDFE7228CDCCAB00017768 /* Alamofire */,
 			);
 			path = DataLayerTests;
 			sourceTree = "<group>";
@@ -122,6 +128,17 @@
 				41BDFE7028CDBAD300017768 /* NetworkService.swift */,
 				41BDFE6A28CBF12400017768 /* Routable.swift */,
 				41BDFE6E28CCC75E00017768 /* Response.swift */,
+			);
+			path = Alamofire;
+			sourceTree = "<group>";
+		};
+		41BDFE7228CDCCAB00017768 /* Alamofire */ = {
+			isa = PBXGroup;
+			children = (
+				41BDFE7928CDFC9C00017768 /* NetworkServiceTests.swift */,
+				41BDFE7728CDFC8500017768 /* TestRouter.swift */,
+				41BDFE7528CDCD3F00017768 /* NetworkService+.swift */,
+				41BDFE7328CDCCD500017768 /* MockURLProtocol.swift */,
 			);
 			path = Alamofire;
 			sourceTree = "<group>";
@@ -327,7 +344,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41BDFE1528CA164C00017768 /* DataLayerTests.swift in Sources */,
+				41BDFE7628CDCD3F00017768 /* NetworkService+.swift in Sources */,
+				41BDFE7428CDCCD500017768 /* MockURLProtocol.swift in Sources */,
+				41BDFE7A28CDFC9C00017768 /* NetworkServiceTests.swift in Sources */,
+				41BDFE7828CDFC8500017768 /* TestRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
