@@ -61,7 +61,7 @@ extension Routable {
                     """
                 )
 
-                throw NetworkServiceError.parametersEncodingFailed
+                throw NetworkService.Error.parametersEncodingFailed
             }
 
             request = try encoding.encode(request, with: parameters)
@@ -69,9 +69,4 @@ extension Routable {
 
         return request
     }
-}
-
-
-enum NetworkServiceError: Error, Equatable {
-    case parametersEncodingFailed
 }
