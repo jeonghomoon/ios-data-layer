@@ -37,7 +37,17 @@ enum KeychainItemClass {
 }
 
 final class Keychain: Keychainable {
-    var query: [String : Any] {
+    enum Error: Swift.Error, Equatable {
+        case notFound
+    
+        case unexpectedData
+
+        case duplicateItem
+
+        case unhandledError(status: OSStatus)
+    }
+
+    var query: [String: Any] {
         return [
             kSecClass as String: itemClass.value,
             kSecAttrService as String: service
