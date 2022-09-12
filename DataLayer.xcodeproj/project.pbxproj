@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4141BB5428CF7BD20085B6ED /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141BB5328CF7BD20085B6ED /* Keychain.swift */; };
 		41BDFDFE28CA164B00017768 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BDFDFD28CA164B00017768 /* AppDelegate.swift */; };
 		41BDFE0028CA164B00017768 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BDFDFF28CA164B00017768 /* SceneDelegate.swift */; };
 		41BDFE0228CA164B00017768 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BDFE0128CA164B00017768 /* ViewController.swift */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		07A8E7444B5E1F8C2BF9FC4D /* Pods-DataLayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataLayer.debug.xcconfig"; path = "Target Support Files/Pods-DataLayer/Pods-DataLayer.debug.xcconfig"; sourceTree = "<group>"; };
+		4141BB5328CF7BD20085B6ED /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		41BDFDFA28CA164B00017768 /* DataLayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataLayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41BDFDFD28CA164B00017768 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		41BDFDFF28CA164B00017768 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +81,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4141BB5228CF78A90085B6ED /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				4141BB5328CF7BD20085B6ED /* Keychain.swift */,
+			);
+			path = Keychain;
+			sourceTree = "<group>";
+		};
 		41BDFDF128CA164B00017768 = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				41BDFE6928CBF11900017768 /* Alamofire */,
+				4141BB5228CF78A90085B6ED /* Keychain */,
 				41BDFDFD28CA164B00017768 /* AppDelegate.swift */,
 				41BDFDFF28CA164B00017768 /* SceneDelegate.swift */,
 				41BDFE0128CA164B00017768 /* ViewController.swift */,
@@ -337,6 +348,7 @@
 				41BDFE6B28CBF12400017768 /* Routable.swift in Sources */,
 				41BDFE7128CDBAD300017768 /* NetworkService.swift in Sources */,
 				41BDFE6F28CCC75E00017768 /* Response.swift in Sources */,
+				4141BB5428CF7BD20085B6ED /* Keychain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
