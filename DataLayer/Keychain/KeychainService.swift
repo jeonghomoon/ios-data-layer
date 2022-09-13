@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol KeychainServiceable {
+protocol KeychainServiceable: AnyObject {
     init(keychain: Keychainable)
 
     func create<Key: Hashable, Value: Codable>(
