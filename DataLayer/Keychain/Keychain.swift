@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol Keychainable {
+protocol Keychainable: AnyObject {
     var query: [String: Any] { get }
 
     init(itemClass: KeychainItemClass)

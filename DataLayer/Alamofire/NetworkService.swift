@@ -7,7 +7,7 @@
 
 import Alamofire
 
-protocol NetworkServiceable {
+protocol NetworkServiceable: AnyObject {
     init(session: Session)
 
     func request<Success: Codable, Failure: Codable>(
