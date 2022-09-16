@@ -12,12 +12,12 @@ protocol NetworkServiceable: AnyObject {
 
     func request<Success: Codable, Failure: Codable>(
         router: Routable,
-        completion: @escaping (RequestResult<Success, Failure>) -> Void
+        completion: @escaping (ResponseResult<Success, Failure>) -> Void
     )
 
     func upload<Success: Codable, Failure: Codable>(
         router: Routable,
-        completion: @escaping (RequestResult<Success, Failure>) -> Void
+        completion: @escaping (ResponseResult<Success, Failure>) -> Void
     )
 }
 
@@ -26,6 +26,8 @@ final class NetworkService: NetworkServiceable {
         case multipartRequestFailed
 
         case parametersEncodingFailed
+
+        case invalidHTTPURLResponse
     }
 
     private let session: Session
@@ -36,7 +38,7 @@ final class NetworkService: NetworkServiceable {
 
     func request<Success: Codable, Failure: Codable>(
         router: Routable,
-        completion: @escaping (RequestResult<Success, Failure>) -> Void
+        completion: @escaping (ResponseResult<Success, Failure>) -> Void
     ) {
         let request = session.request(router)
 
@@ -45,7 +47,7 @@ final class NetworkService: NetworkServiceable {
 
     func upload<Success: Codable, Failure: Codable>(
         router: Routable,
-        completion: @escaping (RequestResult<Success, Failure>) -> Void
+        completion: @escaping (ResponseResult<Success, Failure>) -> Void
     ) {
         guard let data = router.multipartFormData else {
             return completion(.failure(Error.multipartRequestFailed))
@@ -58,14 +60,18 @@ final class NetworkService: NetworkServiceable {
 
     private func performRequest<Success: Codable, Failure: Codable>(
         _ request: DataRequest,
-        completion: @escaping (RequestResult<Success, Failure>) -> Void
+        completion: @escaping (ResponseResult<Success, Failure>) -> Void
     ) {
         request.responseDecodable(
-            of: Response<Success, Failure>.self
-        ) { response in let result = response.result
-            switch result {
-            case let .success(data):
-                return completion(.success(data))
+            of: Body<Success, Failure>.self
+        ) { dataResponse in
+            switch dataResponse.result {
+            case let .success(body):
+                guard let statusCode = dataResponse.response?.statusCode else {
+                    return completion(.failure(Error.invalidHTTPURLResponse))
+                }
+
+                return completion(.success((statusCode, body)))
             case let .failure(error):
                 return completion(.failure(error))
             }

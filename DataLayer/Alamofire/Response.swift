@@ -7,10 +7,13 @@
 
 import Foundation
 
-typealias RequestResult<Success: Codable, Failure: Codable> =
+typealias ResponseResult<Success: Codable, Failure: Codable> =
     Result<Response<Success, Failure>, Error>
 
-enum Response<Success: Codable, Failure: Codable>: Codable {
+typealias Response<Success: Codable, Failure: Codable> =
+    (statusCode: Int, body: Body<Success, Failure>)
+
+enum Body<Success: Codable, Failure: Codable>: Codable {
     case success(Success)
     case failure(Failure)
 
