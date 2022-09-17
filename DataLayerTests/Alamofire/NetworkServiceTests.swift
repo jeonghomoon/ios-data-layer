@@ -17,7 +17,7 @@ private struct FailureReponse: Codable {
     let baz: String
 }
 
-private typealias TestResult = RequestResult<SuccessReponse, FailureReponse>
+private typealias TestResult = ResponseResult<SuccessReponse, FailureReponse>
 
 private typealias TestRequest = (
     Routable, @escaping (TestResult) -> Void
@@ -25,6 +25,8 @@ private typealias TestRequest = (
 
 class NetworkServiceTests: XCTestCase {
     var sut: NetworkServiceable!
+
+    private let successStatusCode = 200, failureStatusCode = 400
 
     override func setUp() {
         super.setUp()
@@ -78,6 +80,14 @@ class NetworkServiceTests: XCTestCase {
         )
     }
 
+    func testInvalidHTTPURLResponseError() {
+        requestError(
+            .invalidHTTPURLResponse,
+            router: .validRequest,
+            request: sut.request
+        )
+    }
+
     private func requestSuccess(router: TestRouter, request: TestRequest) {
         let expect = "bar"
 
@@ -88,11 +98,12 @@ class NetworkServiceTests: XCTestCase {
         request(router) { result in
             guard
                 case let .success(response) = result,
-                case let .success(success) = response
+                case let .success(success) = response.body
             else {
                 return
             }
 
+            XCTAssertEqual(response.statusCode, self.successStatusCode)
             XCTAssertEqual(success.foo, expect)
 
             expectation.fulfill()
@@ -111,11 +122,12 @@ class NetworkServiceTests: XCTestCase {
         request(router) { result in
             guard
                 case let .success(response) = result,
-                case let .failure(failure) = response
+                case let .failure(failure) = response.body
             else {
                 return
             }
 
+            XCTAssertEqual(response.statusCode, self.failureStatusCode)
             XCTAssertEqual(failure.baz, expect)
 
             expectation.fulfill()
@@ -131,8 +143,13 @@ class NetworkServiceTests: XCTestCase {
     ) {
         let expect = "bar"
 
-        initSuccess(with: expect)
-
+        switch (expectedError) {
+        case .multipartRequestFailed, .parametersEncodingFailed:
+            initSuccess(with: expect)
+        case .invalidHTTPURLResponse:
+            initInvalidHTTPURLResponse(with: expect)
+        }
+            
         let expectation = XCTestExpectation()
 
         request(router) { (result: TestResult) in
@@ -165,7 +182,7 @@ class NetworkServiceTests: XCTestCase {
 
             let response = HTTPURLResponse(
                 url: request.url!,
-                statusCode: 200,
+                statusCode: self.successStatusCode,
                 httpVersion: "2.0",
                 headerFields: nil
             )!
@@ -180,10 +197,20 @@ class NetworkServiceTests: XCTestCase {
 
             let response = HTTPURLResponse(
                 url: request.url!,
-                statusCode: 400,
+                statusCode: self.failureStatusCode,
                 httpVersion: "2.0",
                 headerFields: nil
             )!
+
+            return (response, exampleData)
+        }
+    }
+
+    private func initInvalidHTTPURLResponse(with expect: String) {
+        MockURLProtocol.requestHandler = { request in
+            let exampleData = "{\"foo\": \"\(expect)\",}".data(using: .utf8)!
+
+            let response = URLResponse()
 
             return (response, exampleData)
         }
