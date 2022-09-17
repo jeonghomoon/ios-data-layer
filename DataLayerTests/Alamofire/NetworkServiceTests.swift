@@ -41,41 +41,47 @@ class NetworkServiceTests: XCTestCase {
     }
 
     func testValidRequestSuccess() {
-        requestSuccess(router: .validRequest, request: sut.request)
+        requestSuccess(router: TestRouter.validRequest, request: sut.request)
     }
 
     func testInvalidRequestFailure() {
-        requestFailure(router: .validRequest, request: sut.request)
+        requestFailure(router: TestRouter.validRequest, request: sut.request)
     }
 
     func testValidEncodingRequestSuccess() {
-        requestSuccess(router: .validEncodingRequest, request: sut.request)
+        requestSuccess(
+            router: TestRouter.validEncodingRequest,
+            request: sut.request
+        )
     }
 
     func testValidEncodingRequestFailure() {
-        requestFailure(router: .validEncodingRequest, request: sut.request)
+        requestFailure(
+            router: TestRouter.validEncodingRequest,
+            request: sut.request
+        )
     }
 
     func testInvalidEncodingRequestError() {
         requestError(
             .parametersEncodingFailed,
-            router: .invalidEncodingRequest,
+            router: TestRouter.invalidEncodingRequest,
             request: sut.request
         )
     }
 
     func testValidUploadSuccess() {
-        requestSuccess(router: .validUpload, request: sut.upload)
+        requestSuccess(router: TestRouter.validUpload, request: sut.upload)
     }
 
     func testValidUploadFailure() {
-        requestFailure(router: .validUpload, request: sut.upload)
+        requestFailure(router: TestRouter.validUpload, request: sut.upload)
     }
 
     func testInvalidUploadError() {
         requestError(
             .multipartRequestFailed,
-            router: .invalidUpload,
+            router: TestRouter.invalidUpload,
             request: sut.upload
         )
     }
@@ -83,12 +89,26 @@ class NetworkServiceTests: XCTestCase {
     func testInvalidHTTPURLResponseError() {
         requestError(
             .invalidHTTPURLResponse,
-            router: .validRequest,
+            router: TestRouter.validRequest,
             request: sut.request
         )
     }
 
-    private func requestSuccess(router: TestRouter, request: TestRequest) {
+    func testEmptyEncodingResponse() {
+        requestSuccess(router: EmptyRouter.emptyEncoding, request: sut.request)
+
+        requestFailure(router: EmptyRouter.emptyEncoding, request: sut.request)
+    }
+
+    func testEmptyMultipartFormDataResponseError() {
+        requestError(
+            .multipartRequestFailed,
+            router: EmptyRouter.emptyMultipartFormData,
+            request: sut.upload
+        )
+    }
+
+    private func requestSuccess(router: Routable, request: TestRequest) {
         let expect = "bar"
 
         initSuccess(with: expect)
@@ -112,7 +132,7 @@ class NetworkServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
 
-    private func requestFailure(router: TestRouter, request: TestRequest) {
+    private func requestFailure(router: Routable, request: TestRequest) {
         let expect = "qux"
 
         initFailure(with: expect)
@@ -138,7 +158,7 @@ class NetworkServiceTests: XCTestCase {
 
     private func requestError(
         _ expectedError: NetworkService.Error,
-        router: TestRouter,
+        router: Routable,
         request: TestRequest
     ) {
         let expect = "bar"
