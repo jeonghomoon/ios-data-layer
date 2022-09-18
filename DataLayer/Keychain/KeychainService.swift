@@ -10,32 +10,33 @@ import Foundation
 protocol KeychainServiceable: AnyObject {
     init(keychain: Keychainable)
 
-    func create<Key: Hashable, Value: Codable>(
-        value: Value,
-        forKey key: Key
-    ) throws
+    func create<Value: Codable>(_ value: Value, forKey key: String) throws
 
-    func read<Key: Hashable, Value: Codable>(forKey key: Key) throws -> Value
+    func read<Value: Codable>(forKey key: String) throws -> Value
 
-    func update<Key: Hashable, Value: Codable>(
-        value: Value,
-        forKey key: Key
-    ) throws
+    func update<Value: Codable>(_ value: Value, forKey key: String) throws
 
-    func delete<Key: Hashable>(forKey key: Key) throws
+    func delete(forKey key: String) throws
 }
 
 final class KeychainService: KeychainServiceable {
+    enum Error: Swift.Error, Equatable {
+        case notFound
+
+        case unexpectedData
+
+        case duplicateItem
+
+        case unhandledError(status: OSStatus)
+    }
+
     private let keychain: Keychainable
 
     required init(keychain: Keychainable = Keychain()) {
         self.keychain = keychain
     }
 
-    func create<Key: Hashable, Value: Codable>(
-        value: Value,
-        forKey key: Key
-    ) throws {
+    func create<Value: Codable>(_ value: Value, forKey key: String) throws {
         do {
             let data = try JSONEncoder().encode(value)
 
@@ -51,7 +52,7 @@ final class KeychainService: KeychainServiceable {
         }
     }
 
-    func read<Key: Hashable, Value: Codable>(forKey key: Key) throws -> Value {
+    func read<Value: Codable>(forKey key: String) throws -> Value {
         var query = keychain.query
         query[kSecAttrAccount as String] = key
         query[kSecMatchLimit as String] = kSecMatchLimitOne
@@ -67,7 +68,7 @@ final class KeychainService: KeychainServiceable {
             let existingItem = item as? [CFString: Any],
             let data = existingItem[kSecValueData] as? Data
         else {
-            throw Keychain.Error.unexpectedData
+            throw KeychainService.Error.unexpectedData
         }
 
         do {
@@ -78,20 +79,14 @@ final class KeychainService: KeychainServiceable {
         }
     }
 
-    func update<Key: Hashable, Value: Codable>(
-        value: Value,
-        forKey key: Key
-    ) throws {
+    func update<Value: Codable>(_ value: Value, forKey key: String) throws {
         do {
             let data = try JSONEncoder().encode(value)
 
             var query = keychain.query
             query[kSecAttrAccount as String] = key
 
-            let attributes: [String: Any] = [
-                kSecAttrAccount as String: key,
-                kSecValueData as String: data
-            ]
+            let attributes: [String: Any] = [kSecValueData as String: data]
 
             let status = SecItemUpdate(
                 query as CFDictionary,
@@ -104,7 +99,7 @@ final class KeychainService: KeychainServiceable {
         }
     }
 
-    func delete<Key: Hashable>(forKey key: Key) throws {
+    func delete(forKey key: String) throws {
         do {
             var query = keychain.query
             query[kSecAttrAccount as String] = key
@@ -118,16 +113,15 @@ final class KeychainService: KeychainServiceable {
     }
 
     private func checkSecItem(_ status: OSStatus) throws {
-        guard status != errSecDuplicateItem else {
-            throw Keychain.Error.duplicateItem
-        }
-
-        guard status != errSecItemNotFound else {
-            throw Keychain.Error.notFound
-        }
-
-        guard status == errSecSuccess else {
-            throw Keychain.Error.unhandledError(status: status)
+        switch status {
+        case errSecSuccess:
+            return
+        case errSecDuplicateItem:
+            throw KeychainService.Error.duplicateItem
+        case errSecItemNotFound:
+            throw KeychainService.Error.notFound
+        default:
+            throw KeychainService.Error.unhandledError(status: status)
         }
     }
 }
