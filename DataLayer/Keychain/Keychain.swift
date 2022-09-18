@@ -10,64 +10,31 @@ import Foundation
 protocol Keychainable: AnyObject {
     var query: [String: Any] { get }
 
-    init(itemClass: KeychainItemClass)
-}
-
-enum KeychainItemClass {
-    case genericPassword
-    case internetPassword
-    case certificate
-    case key
-    case identity
-
-    var value: CFString {
-        switch self {
-        case .genericPassword:
-            return kSecClassGenericPassword
-        case .internetPassword:
-            return kSecClassInternetPassword
-        case .certificate:
-            return kSecClassCertificate
-        case .key:
-            return kSecClassKey
-        case .identity:
-            return kSecClassIdentity
-        }
-    }
+    init(service: String?)
 }
 
 final class Keychain: Keychainable {
-    enum Error: Swift.Error, Equatable {
-        case notFound
-    
-        case unexpectedData
+    let query: [String: Any]
 
-        case duplicateItem
+    required init(service: String? = nil) {
+        let service: String = {
+            if let service = service {
+                return service
+            } else if let service = Bundle.main.bundleIdentifier {
+                return service
+            } else {
+                fatalError(
+                    """
+                        Failed to load service,
+                        service or bundleIdentifier is not defined.
+                    """
+                )
+            }
+        }()
 
-        case unhandledError(status: OSStatus)
-    }
-
-    var query: [String: Any] {
-        return [
-            kSecClass as String: itemClass.value,
+        query = [
+            kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: service
         ]
-    }
-
-    private let itemClass: KeychainItemClass
-    private let service: String
-
-    required init(itemClass: KeychainItemClass = .genericPassword) {
-        guard let service = Bundle.main.bundleIdentifier else {
-            fatalError(
-                """
-                    Faild to load bundle identifier,
-                    CFBundleIdentifier is not defined.
-                """
-            )
-        }
-
-        self.itemClass = itemClass
-        self.service = service
     }
 }
