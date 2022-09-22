@@ -13,6 +13,7 @@
 		4153575128D8B07F00FBC80A /* Keychain+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4153575028D8B07F00FBC80A /* Keychain+.swift */; };
 		4153575328D8B0AE00FBC80A /* KeychainService+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4153575228D8B0AE00FBC80A /* KeychainService+.swift */; };
 		4153575728D8B0FF00FBC80A /* KeychainServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4153575628D8B0FF00FBC80A /* KeychainServiceTests.swift */; };
+		4166A2B428DC83C90066D335 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4166A2B328DC83C90066D335 /* UserDefaultsService.swift */; };
 		41BDFDFE28CA164B00017768 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BDFDFD28CA164B00017768 /* AppDelegate.swift */; };
 		41BDFE0028CA164B00017768 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BDFDFF28CA164B00017768 /* SceneDelegate.swift */; };
 		41BDFE0228CA164B00017768 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BDFE0128CA164B00017768 /* ViewController.swift */; };
@@ -48,6 +49,7 @@
 		4153575028D8B07F00FBC80A /* Keychain+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Keychain+.swift"; sourceTree = "<group>"; };
 		4153575228D8B0AE00FBC80A /* KeychainService+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeychainService+.swift"; sourceTree = "<group>"; };
 		4153575628D8B0FF00FBC80A /* KeychainServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainServiceTests.swift; sourceTree = "<group>"; };
+		4166A2B328DC83C90066D335 /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		41BDFDFA28CA164B00017768 /* DataLayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataLayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41BDFDFD28CA164B00017768 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		41BDFDFF28CA164B00017768 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +112,14 @@
 			path = Keychain;
 			sourceTree = "<group>";
 		};
+		4166A2B228DC839C0066D335 /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				4166A2B328DC83C90066D335 /* UserDefaultsService.swift */,
+			);
+			path = UserDefaults;
+			sourceTree = "<group>";
+		};
 		41BDFDF128CA164B00017768 = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +145,7 @@
 			children = (
 				41BDFE6928CBF11900017768 /* Alamofire */,
 				4141BB5228CF78A90085B6ED /* Keychain */,
+				4166A2B228DC839C0066D335 /* UserDefaults */,
 				41BDFDFD28CA164B00017768 /* AppDelegate.swift */,
 				41BDFDFF28CA164B00017768 /* SceneDelegate.swift */,
 				41BDFE0128CA164B00017768 /* ViewController.swift */,
@@ -371,6 +382,7 @@
 				41BDFE6B28CBF12400017768 /* Routable.swift in Sources */,
 				41BDFE7128CDBAD300017768 /* NetworkService.swift in Sources */,
 				4141BB5828CF89C90085B6ED /* KeychainService.swift in Sources */,
+				4166A2B428DC83C90066D335 /* UserDefaultsService.swift in Sources */,
 				41BDFE6F28CCC75E00017768 /* Response.swift in Sources */,
 				4141BB5428CF7BD20085B6ED /* Keychain.swift in Sources */,
 			);
