@@ -14,6 +14,7 @@
 		4153575328D8B0AE00FBC80A /* KeychainService+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4153575228D8B0AE00FBC80A /* KeychainService+.swift */; };
 		4153575728D8B0FF00FBC80A /* KeychainServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4153575628D8B0FF00FBC80A /* KeychainServiceTests.swift */; };
 		4166A2B428DC83C90066D335 /* UserDefaultsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4166A2B328DC83C90066D335 /* UserDefaultsStore.swift */; };
+		418BDAEA28DDF67200B073BB /* PersistentStoreable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418BDAE928DDF67200B073BB /* PersistentStoreable.swift */; };
 		41BDFDFE28CA164B00017768 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BDFDFD28CA164B00017768 /* AppDelegate.swift */; };
 		41BDFE0028CA164B00017768 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BDFDFF28CA164B00017768 /* SceneDelegate.swift */; };
 		41BDFE0228CA164B00017768 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BDFE0128CA164B00017768 /* ViewController.swift */; };
@@ -50,6 +51,7 @@
 		4153575228D8B0AE00FBC80A /* KeychainService+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeychainService+.swift"; sourceTree = "<group>"; };
 		4153575628D8B0FF00FBC80A /* KeychainServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainServiceTests.swift; sourceTree = "<group>"; };
 		4166A2B328DC83C90066D335 /* UserDefaultsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStore.swift; sourceTree = "<group>"; };
+		418BDAE928DDF67200B073BB /* PersistentStoreable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentStoreable.swift; sourceTree = "<group>"; };
 		41BDFDFA28CA164B00017768 /* DataLayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataLayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41BDFDFD28CA164B00017768 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		41BDFDFF28CA164B00017768 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				4141BB5328CF7BD20085B6ED /* PersistentService.swift */,
+				418BDAE928DDF67200B073BB /* PersistentStoreable.swift */,
 				4141BB5728CF89C90085B6ED /* KeychainStore.swift */,
 				4166A2B328DC83C90066D335 /* UserDefaultsStore.swift */,
 			);
@@ -370,6 +373,7 @@
 			files = (
 				41BDFE0228CA164B00017768 /* ViewController.swift in Sources */,
 				41BDFDFE28CA164B00017768 /* AppDelegate.swift in Sources */,
+				418BDAEA28DDF67200B073BB /* PersistentStoreable.swift in Sources */,
 				41BDFE0028CA164B00017768 /* SceneDelegate.swift in Sources */,
 				41BDFE6B28CBF12400017768 /* Routable.swift in Sources */,
 				41BDFE7128CDBAD300017768 /* NetworkService.swift in Sources */,
