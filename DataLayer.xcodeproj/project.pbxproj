@@ -10,7 +10,7 @@
 		4141BB5428CF7BD20085B6ED /* PersistentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141BB5328CF7BD20085B6ED /* PersistentService.swift */; };
 		4141BB5828CF89C90085B6ED /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141BB5728CF89C90085B6ED /* KeychainStore.swift */; };
 		4141BB5F28D615350085B6ED /* EmptyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141BB5E28D615350085B6ED /* EmptyRouter.swift */; };
-		4153575128D8B07F00FBC80A /* Keychain+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4153575028D8B07F00FBC80A /* Keychain+.swift */; };
+		4153575128D8B07F00FBC80A /* PersistentServiceTestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4153575028D8B07F00FBC80A /* PersistentServiceTestable.swift */; };
 		4153575328D8B0AE00FBC80A /* KeychainService+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4153575228D8B0AE00FBC80A /* KeychainService+.swift */; };
 		4153575728D8B0FF00FBC80A /* KeychainServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4153575628D8B0FF00FBC80A /* KeychainServiceTests.swift */; };
 		4166A2B428DC83C90066D335 /* UserDefaultsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4166A2B328DC83C90066D335 /* UserDefaultsStore.swift */; };
@@ -49,7 +49,7 @@
 		4141BB5328CF7BD20085B6ED /* PersistentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentService.swift; sourceTree = "<group>"; };
 		4141BB5728CF89C90085B6ED /* KeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStore.swift; sourceTree = "<group>"; };
 		4141BB5E28D615350085B6ED /* EmptyRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyRouter.swift; sourceTree = "<group>"; };
-		4153575028D8B07F00FBC80A /* Keychain+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Keychain+.swift"; sourceTree = "<group>"; };
+		4153575028D8B07F00FBC80A /* PersistentServiceTestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentServiceTestable.swift; sourceTree = "<group>"; };
 		4153575228D8B0AE00FBC80A /* KeychainService+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeychainService+.swift"; sourceTree = "<group>"; };
 		4153575628D8B0FF00FBC80A /* KeychainServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainServiceTests.swift; sourceTree = "<group>"; };
 		4166A2B328DC83C90066D335 /* UserDefaultsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStore.swift; sourceTree = "<group>"; };
@@ -115,7 +115,7 @@
 			children = (
 				4153575628D8B0FF00FBC80A /* KeychainServiceTests.swift */,
 				4153575228D8B0AE00FBC80A /* KeychainService+.swift */,
-				4153575028D8B07F00FBC80A /* Keychain+.swift */,
+				4153575028D8B07F00FBC80A /* PersistentServiceTestable.swift */,
 				41DDD5EC28E0774000881CC0 /* PersistentService+.swift */,
 				41DDD5EA28E076FD00881CC0 /* BundleProvider.swift */,
 			);
@@ -396,7 +396,7 @@
 			files = (
 				4153575328D8B0AE00FBC80A /* KeychainService+.swift in Sources */,
 				41BDFE7628CDCD3F00017768 /* NetworkService+.swift in Sources */,
-				4153575128D8B07F00FBC80A /* Keychain+.swift in Sources */,
+				4153575128D8B07F00FBC80A /* PersistentServiceTestable.swift in Sources */,
 				41BDFE7428CDCCD500017768 /* MockURLProtocol.swift in Sources */,
 				41DDD5ED28E0774000881CC0 /* PersistentService+.swift in Sources */,
 				41BDFE7A28CDFC9C00017768 /* NetworkServiceTests.swift in Sources */,
