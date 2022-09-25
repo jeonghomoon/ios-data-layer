@@ -28,6 +28,8 @@
 		41BDFE7628CDCD3F00017768 /* NetworkService+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BDFE7528CDCD3F00017768 /* NetworkService+.swift */; };
 		41BDFE7828CDFC8500017768 /* TestRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BDFE7728CDFC8500017768 /* TestRouter.swift */; };
 		41BDFE7A28CDFC9C00017768 /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BDFE7928CDFC9C00017768 /* NetworkServiceTests.swift */; };
+		41DDD5EB28E076FD00881CC0 /* BundleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DDD5EA28E076FD00881CC0 /* BundleProvider.swift */; };
+		41DDD5ED28E0774000881CC0 /* PersistentService+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DDD5EC28E0774000881CC0 /* PersistentService+.swift */; };
 		43191D82CA1EF59A6928AE46 /* Pods_DataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAFC0BFF785D8CB01827DF2D /* Pods_DataLayer.framework */; };
 		87D9684BF2F6FAA3DCB0E25D /* Pods_DataLayerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFB777B2EB545EBF1F9C23FF /* Pods_DataLayerTests.framework */; };
 /* End PBXBuildFile section */
@@ -68,6 +70,8 @@
 		41BDFE7528CDCD3F00017768 /* NetworkService+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkService+.swift"; sourceTree = "<group>"; };
 		41BDFE7728CDFC8500017768 /* TestRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRouter.swift; sourceTree = "<group>"; };
 		41BDFE7928CDFC9C00017768 /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
+		41DDD5EA28E076FD00881CC0 /* BundleProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleProvider.swift; sourceTree = "<group>"; };
+		41DDD5EC28E0774000881CC0 /* PersistentService+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistentService+.swift"; sourceTree = "<group>"; };
 		DAFC0BFF785D8CB01827DF2D /* Pods_DataLayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DataLayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC0146D3161118FC38243A4C /* Pods-DataLayerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataLayerTests.release.xcconfig"; path = "Target Support Files/Pods-DataLayerTests/Pods-DataLayerTests.release.xcconfig"; sourceTree = "<group>"; };
 		E6AC935ED0A6074A91D38FA6 /* Pods-DataLayerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataLayerTests.debug.xcconfig"; path = "Target Support Files/Pods-DataLayerTests/Pods-DataLayerTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -106,14 +110,16 @@
 			path = Persistent;
 			sourceTree = "<group>";
 		};
-		4153574F28D8B07200FBC80A /* Keychain */ = {
+		4153574F28D8B07200FBC80A /* Persistent */ = {
 			isa = PBXGroup;
 			children = (
 				4153575628D8B0FF00FBC80A /* KeychainServiceTests.swift */,
 				4153575228D8B0AE00FBC80A /* KeychainService+.swift */,
 				4153575028D8B07F00FBC80A /* Keychain+.swift */,
+				41DDD5EC28E0774000881CC0 /* PersistentService+.swift */,
+				41DDD5EA28E076FD00881CC0 /* BundleProvider.swift */,
 			);
-			path = Keychain;
+			path = Persistent;
 			sourceTree = "<group>";
 		};
 		41BDFDF128CA164B00017768 = {
@@ -156,7 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				41BDFE7228CDCCAB00017768 /* Alamofire */,
-				4153574F28D8B07200FBC80A /* Keychain */,
+				4153574F28D8B07200FBC80A /* Persistent */,
 			);
 			path = DataLayerTests;
 			sourceTree = "<group>";
@@ -392,7 +398,9 @@
 				41BDFE7628CDCD3F00017768 /* NetworkService+.swift in Sources */,
 				4153575128D8B07F00FBC80A /* Keychain+.swift in Sources */,
 				41BDFE7428CDCCD500017768 /* MockURLProtocol.swift in Sources */,
+				41DDD5ED28E0774000881CC0 /* PersistentService+.swift in Sources */,
 				41BDFE7A28CDFC9C00017768 /* NetworkServiceTests.swift in Sources */,
+				41DDD5EB28E076FD00881CC0 /* BundleProvider.swift in Sources */,
 				4153575728D8B0FF00FBC80A /* KeychainServiceTests.swift in Sources */,
 				41BDFE7828CDFC8500017768 /* TestRouter.swift in Sources */,
 				4141BB5F28D615350085B6ED /* EmptyRouter.swift in Sources */,
