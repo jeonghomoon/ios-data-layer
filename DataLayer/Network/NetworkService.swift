@@ -24,9 +24,7 @@ protocol NetworkServiceable: AnyObject {
 final class NetworkService: NetworkServiceable {
     enum Error: Swift.Error, Equatable {
         case multipartRequestFailed
-
         case parametersEncodingFailed
-
         case invalidHTTPURLResponse
     }
 
