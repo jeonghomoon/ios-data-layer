@@ -60,17 +60,25 @@ final class NetworkService: NetworkServiceable {
         _ request: DataRequest,
         completion: @escaping (ResponseResult<Success, Failure>) -> Void
     ) {
-        request.responseDecodable(
-            of: Body<Success, Failure>.self
-        ) { dataResponse in
-            switch dataResponse.result {
-            case let .success(body):
-                guard let statusCode = dataResponse.response?.statusCode else {
+        request.validate().responseData { dataResponse in
+            guard
+                let data = dataResponse.data,
+                let statusCode = dataResponse.response?.statusCode
+            else {
+                guard let error = dataResponse.error else {
                     return completion(.failure(Error.invalidHTTPURLResponse))
                 }
 
+                return completion(.failure(error))
+            }
+
+            do {
+                let body = try JSONDecoder().decode(
+                    Body<Success, Failure>.self,
+                    from: data
+                )
                 return completion(.success((statusCode, body)))
-            case let .failure(error):
+            } catch {
                 return completion(.failure(error))
             }
         }
