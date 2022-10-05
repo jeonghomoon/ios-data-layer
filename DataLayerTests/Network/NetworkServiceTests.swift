@@ -9,15 +9,28 @@ import Alamofire
 import XCTest
 @testable import DataLayer
 
-private struct SuccessReponse: Codable {
+private struct SuccessResponse: Codable {
     let foo: String
 }
 
-private struct FailureReponse: Codable {
+private struct FailureResponse: Codable {
     let baz: String
 }
 
-private typealias TestResult = ResponseResult<SuccessReponse, FailureReponse>
+extension FailureResponse {
+    static var decodingError: DecodingError {
+        let key = Self.CodingKeys.baz
+        let context = DecodingError.Context(
+            codingPath: [],
+            debugDescription:
+                "No value associated with key \(key) (\"\(key.stringValue)\")."
+        )
+
+        return DecodingError.keyNotFound(key, context)
+    }
+}
+
+private typealias TestResult = ResponseResult<SuccessResponse, FailureResponse>
 
 private typealias TestRequest = (
     Routable, @escaping (TestResult) -> Void
@@ -63,7 +76,7 @@ class NetworkServiceTests: XCTestCase {
     }
 
     func testInvalidEncodingRequestError() {
-        requestError(
+        requestNetworkServiceError(
             .parametersEncodingFailed,
             router: TestRouter.invalidEncodingRequest,
             request: sut.request
@@ -79,7 +92,7 @@ class NetworkServiceTests: XCTestCase {
     }
 
     func testInvalidUploadError() {
-        requestError(
+        requestNetworkServiceError(
             .multipartRequestFailed,
             router: TestRouter.invalidUpload,
             request: sut.upload
@@ -87,8 +100,16 @@ class NetworkServiceTests: XCTestCase {
     }
 
     func testInvalidHTTPURLResponseError() {
-        requestError(
+        requestNetworkServiceError(
             .invalidHTTPURLResponse,
+            router: TestRouter.validRequest,
+            request: sut.request
+        )
+    }
+
+    func testInvalidResponseError() {
+        requestDecodingError(
+            FailureResponse.decodingError,
             router: TestRouter.validRequest,
             request: sut.request
         )
@@ -101,7 +122,7 @@ class NetworkServiceTests: XCTestCase {
     }
 
     func testEmptyMultipartFormDataResponseError() {
-        requestError(
+        requestNetworkServiceError(
             .multipartRequestFailed,
             router: EmptyRouter.emptyMultipartFormData,
             request: sut.upload
@@ -120,7 +141,7 @@ class NetworkServiceTests: XCTestCase {
                 case let .success(response) = result,
                 case let .success(success) = response.body
             else {
-                return
+                return XCTFail()
             }
 
             XCTAssertEqual(response.statusCode, self.successStatusCode)
@@ -144,7 +165,7 @@ class NetworkServiceTests: XCTestCase {
                 case let .success(response) = result,
                 case let .failure(failure) = response.body
             else {
-                return
+                return XCTFail()
             }
 
             XCTAssertEqual(response.statusCode, self.failureStatusCode)
@@ -156,7 +177,7 @@ class NetworkServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
 
-    private func requestError(
+    private func requestNetworkServiceError(
         _ expectedError: NetworkService.Error,
         router: Routable,
         request: TestRequest
@@ -173,7 +194,9 @@ class NetworkServiceTests: XCTestCase {
         let expectation = XCTestExpectation()
 
         request(router) { (result: TestResult) in
-            guard case let .failure(error) = result else { return }
+            guard case let .failure(error) = result else {
+                return XCTFail()
+            }
 
             let clientError: Error
 
@@ -185,10 +208,37 @@ class NetworkServiceTests: XCTestCase {
             }
 
             guard let error = clientError as? NetworkService.Error else {
-                return
+                return XCTFail()
             }
 
             XCTAssertEqual(error, expectedError)
+
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 1)
+    }
+
+    private func requestDecodingError(
+        _ expectedError: DecodingError,
+        router: Routable,
+        request: TestRequest
+    ) {
+        let expectation = XCTestExpectation()
+
+        initInvalidResponse()
+
+        request(router) { (result: TestResult) in
+            guard case let .failure(error) = result,
+                  let error = error as? DecodingError,
+                  case let .keyNotFound(key, _) = error,
+                  case let .keyNotFound(expectedKey, _) = expectedError,
+                  key.stringValue == expectedKey.stringValue
+            else {
+                return XCTFail()
+            }
+
+            XCTAssert(true)
 
             expectation.fulfill()
         }
@@ -214,6 +264,21 @@ class NetworkServiceTests: XCTestCase {
     private func initFailure(with expect: String) {
         MockURLProtocol.requestHandler = { request in
             let exampleData = "{\"baz\": \"\(expect)\",}".data(using: .utf8)!
+
+            let response = HTTPURLResponse(
+                url: request.url!,
+                statusCode: self.failureStatusCode,
+                httpVersion: "2.0",
+                headerFields: nil
+            )!
+
+            return (response, exampleData)
+        }
+    }
+
+    private func initInvalidResponse() {
+        MockURLProtocol.requestHandler = { request in
+            let exampleData = "{\"foobar\": \"bazqux\",}".data(using: .utf8)!
 
             let response = HTTPURLResponse(
                 url: request.url!,
