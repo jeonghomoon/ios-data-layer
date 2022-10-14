@@ -13,7 +13,7 @@ protocol JWTAuthorizable: Codable {
     var access: String { get }
 }
 
-class JWTInterceptor<
+final class JWTInterceptor<
     Success: JWTAuthorizable,
     Failure: Codable
 >: RequestInterceptor {

@@ -7,7 +7,7 @@
 
 import XCTest
 
-class MockURLProtocol: URLProtocol {
+final class MockURLProtocol: URLProtocol {
     static var requestHandler: (
         (URLRequest) throws -> (URLResponse, Data)
     )?

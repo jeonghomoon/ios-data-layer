@@ -36,7 +36,7 @@ private typealias TestRequest = (
     Routable, @escaping (TestResult) -> Void
 ) -> Void
 
-class NetworkServiceTests: XCTestCase {
+final class NetworkServiceTests: XCTestCase {
     var sut: NetworkServiceable!
 
     private let successStatusCode = 200, failureStatusCode = 400
